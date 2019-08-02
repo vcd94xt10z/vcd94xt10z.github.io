@@ -14,6 +14,11 @@
 	var index 	    = 1;
 	var ajaxRunning = false;
 	
+	function cleanMessage(){
+		$("#alert-success").html("").css("display","none");
+		$("#alert-error").html("").css("display","none");
+	}
+	
 	function showMessage(message,type){
 		$("#alert-success").html("").css("display","none");
 		$("#alert-error").html("").css("display","none");
@@ -36,11 +41,13 @@
 		
 		button1.html("Aguarde");
 		$("#table1 tbody").html("");
+		cleanMessage();
 		
 		var promise = Freight.calcSync(input);
 		promise.then(function(data){
 			ajaxRunning	= false;
 			button1.html("Calcular (1 Passo)");
+			cleanMessage();
 			
 			for(let i in data.result){
 				renderCarrierResult(data.result[i]);
@@ -69,9 +76,11 @@
 		
 		button2.html("Aguarde");
 		$("#table1 tbody").html("");
+		cleanMessage();
 		
 		Freight.calcAll(input,renderCarrierResult,function(){
 			ajaxRunning = false;
+			cleanMessage();
 			button2.html("Calcular (N Passos)");
 		});
 	}
@@ -121,6 +130,7 @@
 	}
 
 	function getFormData(){
+		let config = $("#config").val();
 		let zipcode = $("#zipcode").val();
 		let total = $("#total").val();
 		let weight = $("#weight").val();
@@ -131,8 +141,10 @@
 		let docnr = $("#docnr").val();
 		let ie = $("#ie").val();
 		let uf = $("#uf").val();
+		let typest = $("#typest").val();
 		
 		let input = {
+			"config": config,
 			"zipcode": zipcode,
 			"total": parseFloat(total),
 			"weight": parseFloat(weight),
@@ -142,7 +154,8 @@
 			"diameter": parseFloat(diameter),
 			"docnr": docnr,
 			"ie": ie,
-			"uf": uf
+			"uf": uf,
+			"typest": typest
 		};
 		
 		return input;
@@ -221,6 +234,14 @@
 				<form>
 					<div class="form-group row">
 						<label for="docnr" class="col-12 col-form-label">
+							Configuração
+						</label>
+						<div class="col-12">
+							<input id="config" name="config" type="text" class="form-control form-control-sm" value="default"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="docnr" class="col-12 col-form-label">
 							CPF/CNPJ
 							
 							(Geradores 
@@ -239,6 +260,12 @@
 						</label>
 						<div class="col-12">
 							<input id="ie" name="ie" type="text" class="form-control form-control-sm" value=""/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="typest" class="col-12 col-form-label">Tipo ST</label>
+						<div class="col-12">
+							<input id="typest" name="typest" type="text" class="form-control form-control-sm" value=""/>
 						</div>
 					</div>
 				  <div class="form-group row">
