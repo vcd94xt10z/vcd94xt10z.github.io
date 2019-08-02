@@ -171,7 +171,7 @@
 		});
 		
 		$("#update-server-param").click(function(){
-			Freight.httpSchema = $(".http-schema").val();
+			Freight.httpScheme = $(".http-scheme").val();
 			Freight.servername = $(".http-servername").val();
 			Freight.port       = $(".http-port").val();
 		}).click();
@@ -214,7 +214,7 @@
 			<div class="col-12">
 				<h2>Parâmetros do Servidor</h2>
 				<form id="form1" class="form-inline">
-					<select class="form-control form-control-sm http-schema">
+					<select class="form-control form-control-sm http-scheme">
 						<option>http</option>
 						<option>https</option>
 					</select>
