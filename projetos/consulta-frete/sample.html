@@ -188,7 +188,7 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container-fluid">
 		<br>
 		<h1>Consulta de Frete</h1>
 		<p>
@@ -216,7 +216,7 @@
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-4">
+			<div class="col-12 col-md-4">
 				<h2>Parâmetros do Frete</h2>
 				<form>
 					<div class="form-group row">
@@ -235,10 +235,7 @@
 						<label for="ie" class="col-12 col-form-label">
 							Inscrição Estadual
 							
-							(Gerador 
-							<a href="https://www.4devs.com.br/gerador_de_inscricao_estadual" target="_blank">
-								IE
-							</a>)
+							(Gerador <a href="https://www.4devs.com.br/gerador_de_inscricao_estadual" target="_blank">IE</a>)
 						</label>
 						<div class="col-12">
 							<input id="ie" name="ie" type="text" class="form-control form-control-sm" value=""/>
@@ -249,10 +246,7 @@
 						<label for="zipcode" class="col-form-label">
 							CEP
 							
-							(Gerador 
-							<a href="https://www.4devs.com.br/gerador_de_cep" target="_blank">
-								CEP
-							</a>)
+							(Gerador <a href="https://www.4devs.com.br/gerador_de_cep" target="_blank">CEP</a>)
 						</label>
 					    <input id="zipcode" name="zipcode" type="text" class="form-control form-control-sm" required="required" value="04180112">
 					</div>
@@ -297,7 +291,7 @@
 				  </div>
 				</form>
 			</div>
-			<div class="col-8">
+			<div class="col-12 col-md-8">
 				<h2>Resultado</h2>
 				
 				<div id="alert-success" class="alert alert-success" role="alert" style="display:none"></div>
