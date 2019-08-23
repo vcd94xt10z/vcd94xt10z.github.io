@@ -9,11 +9,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- <script src="/freight.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/gh/vcd94xt10z/consulta-frete/freight.js"></script>
 	<title>Consulta de Frete</title>
 	<script>
 	var index 	    = 1;
 	var ajaxRunning = false;
+	var carrierList = ["correios"];
 	
 	function cleanMessage(){
 		$("#alert-success").html("").css("display","none");
@@ -44,16 +46,16 @@
 		$("#table1 tbody").html("");
 		cleanMessage();
 		
-		var promise = Freight.calcSync(input);
-		promise.then(function(data){
+		var promise = Freight.calcSync(input,carrierList);
+		promise.then(function(resultList){
 			ajaxRunning	= false;
 			button1.html("Calcular (1 Passo)");
 			cleanMessage();
 			
-			for(let i in data.result){
-				renderCarrierResult(data.result[i]);
+			for(let i in resultList){
+				renderCarrierResult(resultList[i]);
 			}
-		}).catch(function(xhr){
+		}).catch(function(xhr,b,c,d){
 			ajaxRunning	= false;
 			button1.html("Calcular (1 Passo)");
 			
@@ -72,14 +74,14 @@
 		}
 		ajaxRunning = true;
 		
-		var input = getFormData();
+		let input   = getFormData();
 		let button2 = $("#button-calc2");
 		
 		button2.html("Aguarde");
 		$("#table1 tbody").html("");
 		cleanMessage();
 		
-		Freight.calcAll(input,renderCarrierResult,function(){
+		Freight.calcAll(input,carrierList,renderCarrierResult,function(){
 			ajaxRunning = false;
 			cleanMessage();
 			button2.html("Calcular (N Passos)");
